@@ -7,6 +7,12 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <style>
     #map { height: 100vh; }
+    .circle-icon {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 2px solid #000;
+    }
   </style>
 </head>
 <body>
@@ -20,47 +26,77 @@
       attribution: '&copy; OpenStreetMap'
     }).addTo(map);
 
-    const cestaIcon = L.icon({
-      iconUrl: 'icons/cesta.png',
-      iconSize: [32, 32]
-    });
-
-    const cestaStromIcon = L.icon({
-      iconUrl: 'icons/cesta-strom.png',
-      iconSize: [32, 32]
-    });
-
+    // Body
     const body = [
       {
         nazev: "Chrášťany",
         pozice: [50.05990, 14.93471],
         popis: "Cesta se zelení",
-        ikona: cestaStromIcon
+        barvy: ["gray", "green"]
       },
       {
         nazev: "Radovesnice II (1)",
         pozice: [50.11134, 15.37710],
         popis: "Cesta",
-        ikona: cestaIcon
+        barvy: ["gray"]
       },
       {
         nazev: "Rozehnaly",
         pozice: [50.11210, 15.38734],
         popis: "Cesta",
-        ikona: cestaIcon
+        barvy: ["gray"]
       },
       {
         nazev: "Radovesnice II (2)",
         pozice: [50.10002, 15.37418],
         popis: "Cesta",
-        ikona: cestaIcon
+        barvy: ["gray"]
       }
     ];
 
+    function createCircleMarker(latlng, colors) {
+      if (colors.length === 1) {
+        return L.circleMarker(latlng, {
+          radius: 8,
+          fillColor: colors[0],
+          color: '#000',
+          weight: 1,
+          opacity: 1,
+          fillOpacity: 0.9
+        });
+      } else {
+        // Pro dvoubarevný bod vytvoříme dvě překrývající se vrstvy
+        const group = L.layerGroup();
+        const outer = L.circleMarker(latlng, {
+          radius: 8,
+          fillColor: colors[0],
+          color: '#000',
+          weight: 1,
+          opacity: 1,
+          fillOpacity: 1
+        });
+        const inner = L.circleMarker(latlng, {
+          radius: 4,
+          fillColor: colors[1],
+          color: '#000',
+          weight: 1,
+          opacity: 1,
+          fillOpacity: 1
+        });
+        group.addLayer(outer);
+        group.addLayer(inner);
+        return group;
+      }
+    }
+
     body.forEach(bod => {
-      L.marker(bod.pozice, { icon: bod.ikona })
-        .addTo(map)
-        .bindPopup(`<strong>${bod.nazev}</strong><br>${bod.popis}`);
+      const marker = createCircleMarker(bod.pozice, bod.barvy);
+      marker.addTo(map);
+      if (marker.bindPopup) {
+        marker.bindPopup(`<strong>${bod.nazev}</strong><br>${bod.popis}`);
+      } else {
+        marker.eachLayer(layer => layer.bindPopup(`<strong>${bod.nazev}</strong><br>${bod.popis}`));
+      }
     });
   </script>
 </body>
