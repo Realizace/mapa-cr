@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Mapa ČR s body</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="leaflet/leaflet.css" />
+  <style>
+    #map { height: 100vh; width: 100%; }
+    .popup-media img, .popup-media video { max-width: 100%; height: auto; display: block; margin: 5px 0; }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+  <script src="leaflet/leaflet.js"></script>
+  <script>
+    var map = L.map('map').setView([49.8, 15.5], 7);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    var marker = L.marker([50.0755, 14.4378]).addTo(map);
+    marker.bindPopup(\`
+      <h3>Praha</h3>
+      <div class="popup-media">
+        <img src="img/praha.jpg" alt="Praha">
+        <video controls>
+          <source src="video/praha.mp4" type="video/mp4">
+          Váš prohlížeč nepodporuje video tag.
+        </video>
+      </div>
+    \`);
+  </script>
+</body>
+</html>
