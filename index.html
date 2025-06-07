@@ -2,43 +2,66 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mapa ČR - Realizace</title>
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-  />
+  <meta charset="UTF-8">
+  <title>Mapa ČR s body</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <style>
-    body, html { margin: 0; padding: 0; height: 100%; }
-    #map { width: 100%; height: 100vh; }
-    .popup-media img, .popup-media video {
-      max-width: 250px;
-      display: block;
-      margin-bottom: 8px;
-    }
+    #map { height: 100vh; }
   </style>
 </head>
 <body>
   <div id="map"></div>
-
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script>
-    const map = L.map('map').setView([50.0755, 14.4378], 7); // Praha
+    const map = L.map('map').setView([50.0281, 15.2014], 11); // Kolín jako výchozí bod
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: 'Map data © OpenStreetMap contributors',
+      attribution: '&copy; OpenStreetMap'
     }).addTo(map);
 
-    const marker = L.marker([50.0755, 14.4378]).addTo(map);
+    const cestaIcon = L.icon({
+      iconUrl: 'icons/cesta.png',
+      iconSize: [32, 32]
+    });
 
-    marker.bindPopup(`
-      <div class="popup-media">
-        <img src="img/praha.jpg" alt="Praha" />
-        <video src="video/praha.mp4" controls></video>
-        <p>Ukázkové místo: Praha</p>
-      </div>
-    `);
+    const cestaStromIcon = L.icon({
+      iconUrl: 'icons/cesta-strom.png',
+      iconSize: [32, 32]
+    });
+
+    const body = [
+      {
+        nazev: "Chrášťany",
+        pozice: [50.05990, 14.93471],
+        popis: "Cesta se zelení",
+        ikona: cestaStromIcon
+      },
+      {
+        nazev: "Radovesnice II (1)",
+        pozice: [50.11134, 15.37710],
+        popis: "Cesta",
+        ikona: cestaIcon
+      },
+      {
+        nazev: "Rozehnaly",
+        pozice: [50.11210, 15.38734],
+        popis: "Cesta",
+        ikona: cestaIcon
+      },
+      {
+        nazev: "Radovesnice II (2)",
+        pozice: [50.10002, 15.37418],
+        popis: "Cesta",
+        ikona: cestaIcon
+      }
+    ];
+
+    body.forEach(bod => {
+      L.marker(bod.pozice, { icon: bod.ikona })
+        .addTo(map)
+        .bindPopup(`<strong>${bod.nazev}</strong><br>${bod.popis}`);
+    });
   </script>
 </body>
 </html>
