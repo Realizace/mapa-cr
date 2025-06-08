@@ -3,7 +3,7 @@
 <html lang="cs">
 <head>
   <meta charset="UTF-8">
-  <title>Mapa cest se středovými body</title>
+  <title>Mapa cest z dokumentu</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <style>#map { height: 100vh; }</style>
 </head>
@@ -15,64 +15,19 @@
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; OpenStreetMap contributors'
     }).addTo(map);
-
-    const cestaIcon = L.icon({
-      iconUrl: 'icons/cesta.png',
-      iconSize: [32, 32],
-      iconAnchor: [16, 16]
-    });
-
-    const cestaStromIcon = L.icon({
-      iconUrl: 'icons/cesta-strom.png',
-      iconSize: [32, 32],
-      iconAnchor: [16, 16]
-    });
-
-    const trasy = [
-      {
-        nazev: "Bod 1",
-        start: [50.06020, 14.92937],
-        end: [50.05955, 14.94056],
-        typ: "cesta se zelení",
-        ikona: cestaStromIcon
-      },
-      {
-        nazev: "Bod 2",
-        start: [50.10105, 15.36838],
-        end: [50.09924, 15.38061],
-        typ: "cesta",
-        ikona: cestaIcon
-      },
-      {
-        nazev: "Bod 3",
-        start: [50.11312, 15.38702],
-        end: [50.11134, 15.38914],
-        typ: "cesta",
-        ikona: cestaIcon
-      },
-      {
-        nazev: "Bod 4",
-        start: [50.10978, 15.37613],
-        end: [50.11278, 15.37795],
-        typ: "cesta",
-        ikona: cestaIcon
-      }
-    ];
-
-    trasy.forEach(t => {
-      // Trasa jako čára
-      L.polyline([t.start, t.end], { color: 'gray' }).addTo(map);
-
-      // Středový bod
-      const mid = [
-        (t.start[0] + t.end[0]) / 2,
-        (t.start[1] + t.end[1]) / 2
-      ];
-
-      L.marker(mid, { icon: t.ikona })
-        .addTo(map)
-        .bindPopup(`<strong>${t.nazev}</strong><br>${t.typ}`);
-    });
+    
+    L.polyline([[50.0602, 14.92937], [50.05955, 14.94056]], { color: 'gray' }).addTo(map)
+        .bindPopup("<strong>Chrášťany</strong><br>cesta se zelení");
+    
+    L.polyline([[50.10105, 15.36838], [50.09924, 15.38061]], { color: 'gray' }).addTo(map)
+        .bindPopup("<strong>Radovesnice II (1)</strong><br>cesta");
+    
+    L.polyline([[50.11312, 15.38702], [50.11286, 15.38734], [50.11232, 15.38701], [50.11134, 15.38914]], { color: 'gray' }).addTo(map)
+        .bindPopup("<strong>Rozehnaly</strong><br>cesta");
+    
+    L.polyline([[50.10978, 15.37613], [50.11278, 15.37795]], { color: 'gray' }).addTo(map)
+        .bindPopup("<strong>Radovesnice II (2)</strong><br>cesta");
+    
   </script>
 </body>
 </html>
