@@ -10,25 +10,25 @@ document.addEventListener("DOMContentLoaded", () => {
       name: "Chrášťany",
       type: "cesta se zelení",
       path: [[50.0602, 14.92937], [50.05955, 14.94056]],
-      icon: "icons/cesta-se-zeleni.png"
+      icon: "https://cdn-icons-png.flaticon.com/512/684/684908.png"
     },
     {
       name: "Radovesnice II (1)",
       type: "cesta",
       path: [[50.10105, 15.36838], [50.09924, 15.38061]],
-      icon: "icons/cesta_clean.png"
+      icon: "https://cdn-icons-png.flaticon.com/512/684/684908.png"
     },
     {
       name: "Rozehnaly",
       type: "cesta",
       path: [[50.11312, 15.38702], [50.11286, 15.38734], [50.11232, 15.38701], [50.11134, 15.38914]],
-      icon: "icons/cesta_clean.png"
+      icon: "https://cdn-icons-png.flaticon.com/512/684/684908.png"
     },
     {
       name: "Radovesnice II (2)",
       type: "cesta",
       path: [[50.10978, 15.37613], [50.11278, 15.37795]],
-      icon: "icons/cesta_clean.png"
+      icon: "https://cdn-icons-png.flaticon.com/512/684/684908.png"
     }
   ];
 
