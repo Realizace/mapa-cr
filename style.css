@@ -2,6 +2,9 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 header {
@@ -12,8 +15,9 @@ header {
 }
 
 .container {
+  flex: 1;
   display: flex;
-  height: calc(100vh - 60px);
+  height: 100%;
 }
 
 #sidebar {
@@ -46,4 +50,5 @@ header {
 
 #map {
   flex: 1;
+  height: 100%;
 }
