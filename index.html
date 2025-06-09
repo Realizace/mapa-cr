@@ -3,55 +3,22 @@
 <html lang="cs">
 <head>
   <meta charset="UTF-8">
-  <title>Mapa cest s ikonami</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-  <style>#map { height: 100vh; }</style>
+  <title>Státní pozemkový úřad, pobočka Kolín</title>
+  <link rel="stylesheet" href="leaflet.css" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div id="map"></div>
-  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-  <script>
-    const map = L.map('map').setView([50.07, 15.1], 11);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; OpenStreetMap contributors'
-    }).addTo(map);
-    
-    L.polyline([[50.0602, 14.92937], [50.05955, 14.94056]], { color: 'gray' }).addTo(map);
-    L.marker([50.059875000000005, 14.934965], {
-      icon: L.icon({
-        iconUrl: 'icons/cesta-se-zeleni.png',
-        iconSize: [32, 32],
-        iconAnchor: [16, 16]
-      })
-    }).addTo(map).bindPopup("<strong>Chrášťany</strong><br>cesta se zelení");
-    
-    L.polyline([[50.10105, 15.36838], [50.09924, 15.38061]], { color: 'gray' }).addTo(map);
-    L.marker([50.100145, 15.374495], {
-      icon: L.icon({
-        iconUrl: 'icons/cesta_clean.png',
-        iconSize: [32, 32],
-        iconAnchor: [16, 16]
-      })
-    }).addTo(map).bindPopup("<strong>Radovesnice II (1)</strong><br>cesta");
-    
-    L.polyline([[50.11312, 15.38702], [50.11286, 15.38734], [50.11232, 15.38701], [50.11134, 15.38914]], { color: 'gray' }).addTo(map);
-    L.marker([50.11223, 15.388079999999999], {
-      icon: L.icon({
-        iconUrl: 'icons/cesta_clean.png',
-        iconSize: [32, 32],
-        iconAnchor: [16, 16]
-      })
-    }).addTo(map).bindPopup("<strong>Rozehnaly</strong><br>cesta");
-    
-    L.polyline([[50.10978, 15.37613], [50.11278, 15.37795]], { color: 'gray' }).addTo(map);
-    L.marker([50.11128, 15.377040000000001], {
-      icon: L.icon({
-        iconUrl: 'icons/cesta_clean.png',
-        iconSize: [32, 32],
-        iconAnchor: [16, 16]
-      })
-    }).addTo(map).bindPopup("<strong>Radovesnice II (2)</strong><br>cesta");
-    
-  </script>
+  <header>
+    <h1>Státní pozemkový úřad, pobočka Kolín</h1>
+  </header>
+  <div class="container">
+    <aside id="sidebar">
+      <h2>Seznam lokalit</h2>
+      <ul id="locationList"></ul>
+    </aside>
+    <main id="map"></main>
+  </div>
+  <script src="leaflet.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
